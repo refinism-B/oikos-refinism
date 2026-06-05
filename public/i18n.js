@@ -5,7 +5,7 @@
  * Dependencies: none (vanilla JS, Fetch API, Intl API)
  */
 
-const SUPPORTED_LOCALES = ['de', 'en', 'es', 'fr', 'it', 'sv', 'el', 'ru', 'tr', 'zh', 'ja', 'ar', 'hi', 'pt', 'uk', 'pl', 'nl', 'cs'];
+const SUPPORTED_LOCALES = ['de', 'en', 'es', 'fr', 'it', 'sv', 'el', 'ru', 'tr', 'zh', 'TW', 'ja', 'ar', 'hi', 'pt', 'uk', 'pl', 'nl', 'cs'];
 const DEFAULT_LOCALE = 'de';
 const STORAGE_KEY = 'oikos-locale';
 const DATE_FORMAT_KEY = 'oikos-date-format';
@@ -30,7 +30,9 @@ function resolveLocale() {
 
   const browserLocales = navigator.languages || [navigator.language];
   for (const tag of browserLocales) {
-    const base = tag.split('-')[0].toLowerCase();
+    const lower = tag.toLowerCase();
+    if (lower === 'zh-tw' || lower === 'zh-hant' || lower === 'zh-hk') return 'TW';
+    const base = lower.split('-')[0];
     if (SUPPORTED_LOCALES.includes(base)) return base;
   }
   return 'en';

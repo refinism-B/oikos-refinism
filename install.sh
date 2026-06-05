@@ -23,16 +23,22 @@ ask()     { printf "%s%s%s " "$BOLD" "$*" "$RESET"; }
 # der Umgebung (OIKOS_INSTALLER_LANG > LC_ALL > LC_MESSAGES > LANG), analog der App.
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 CLI_LOCALES_DIR="$SCRIPT_DIR/tools/installer/locales/cli"
-SUPPORTED_LOCALES=(de en es fr it sv el ru tr zh ja ar hi pt uk pl nl cs)
+SUPPORTED_LOCALES=(de en es fr it sv el ru tr zh TW ja ar hi pt uk pl nl cs)
 FALLBACK_LOCALE=en
 ACTIVE_LOCALE=$FALLBACK_LOCALE
 
 in_array() { local needle="$1"; shift; local e; for e in "$@"; do [ "$e" = "$needle" ] && return 0; done; return 1; }
 
 # Rohen Locale-Tag (z. B. de_DE.UTF-8) auf eine unterstützte Basissprache abbilden.
+# zh_TW / zh-TW maps to TW before stripping the region suffix.
 normalize_locale() {
   local raw="${1:-}"
-  raw="${raw%%.*}"; raw="${raw%%@*}"; raw="${raw%%_*}"; raw="${raw,,}"
+  raw="${raw%%.*}"; raw="${raw%%@*}"
+  # Preserve zh_TW / zh-TW as TW before lowercasing strips the distinction
+  if [[ "${raw,,}" == "zh_tw" || "${raw,,}" == "zh-tw" ]]; then
+    printf '%s' "TW"; return
+  fi
+  raw="${raw%%_*}"; raw="${raw,,}"
   if in_array "$raw" "${SUPPORTED_LOCALES[@]}"; then printf '%s' "$raw"
   else printf '%s' "$FALLBACK_LOCALE"; fi
 }

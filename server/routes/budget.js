@@ -15,7 +15,7 @@ const log = createLogger('Budget');
 
 const router  = express.Router();
 const LOCALE_CACHE = new Map();
-const SUPPORTED_LANGS = new Set(['ar', 'de', 'el', 'en', 'es', 'fr', 'hi', 'it', 'ja', 'pt', 'ru', 'sv', 'tr', 'uk', 'zh']);
+const SUPPORTED_LANGS = new Set(['ar', 'de', 'el', 'en', 'es', 'fr', 'hi', 'it', 'ja', 'pt', 'ru', 'sv', 'tr', 'TW', 'uk', 'zh']);
 const CATEGORY_LABEL_KEYS = {
   housing: 'catHousing',
   food: 'catFood',

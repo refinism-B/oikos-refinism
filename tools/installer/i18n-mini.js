@@ -6,7 +6,7 @@
  * de ist die Referenzlocale, en der Fallback für fehlende Schlüssel.
  */
 
-export const SUPPORTED_LOCALES = ['de', 'en', 'es', 'fr', 'it', 'sv', 'el', 'ru', 'tr', 'zh', 'ja', 'ar', 'hi', 'pt', 'uk', 'pl', 'nl', 'cs'];
+export const SUPPORTED_LOCALES = ['de', 'en', 'es', 'fr', 'it', 'sv', 'el', 'ru', 'tr', 'zh', 'TW', 'ja', 'ar', 'hi', 'pt', 'uk', 'pl', 'nl', 'cs'];
 const FALLBACK_LOCALE = 'en';
 const RTL_LOCALES = ['ar'];
 
@@ -17,7 +17,9 @@ let activeLocale = FALLBACK_LOCALE;
 /** Browsersprache > Englisch, analog public/i18n.js:31-34. */
 export function resolveLocale(languages = navigator.languages || [navigator.language]) {
   for (const tag of languages) {
-    const base = (tag || '').split('-')[0].toLowerCase();
+    const lower = (tag || '').toLowerCase();
+    if (lower === 'zh-tw' || lower === 'zh-hant' || lower === 'zh-hk') return 'TW';
+    const base = lower.split('-')[0];
     if (SUPPORTED_LOCALES.includes(base)) return base;
   }
   return FALLBACK_LOCALE;
