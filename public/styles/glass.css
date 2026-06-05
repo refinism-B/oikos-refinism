@@ -843,7 +843,7 @@ html.navigating .app-content *::after {
  * ================================================================ */
 @media (min-width: 1024px) {
   .nav-sidebar__indicator {
-    background: color-mix(in srgb, var(--active-module-accent, var(--color-accent)) 14%, var(--color-surface-elevated));
+    background: color-mix(in srgb, var(--active-module-accent, var(--color-accent)) 14%, transparent);
     border: 1px solid var(--glass-border-subtle);
     box-shadow: var(--glass-inset-soft);
   }

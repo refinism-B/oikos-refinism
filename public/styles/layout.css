@@ -2490,6 +2490,11 @@ textarea.input { resize: vertical; }
   box-shadow: none !important;
 }
 
+/* Liquid: Indikator übernimmt Hover-Feedback — kein eigener Hintergrund auf Nav-Items */
+.nav-sidebar__items--liquid .nav-item:hover:not([aria-current="page"]) {
+  background: transparent;
+}
+
 /* ── Sidebar: Abschnittsbezeichnung (z.B. "Haushalt") ── */
 .nav-section-label {
   font-size: var(--text-xs);
