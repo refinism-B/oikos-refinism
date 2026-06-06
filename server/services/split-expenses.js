@@ -5,7 +5,7 @@
 
 const CURRENCY_MINOR_UNITS = {
   BHD: 3, IQD: 3, JOD: 3, KWD: 3, OMR: 3, TND: 3,
-  CLP: 0, JPY: 0, KRW: 0, VND: 0,
+  CLP: 0, JPY: 0, KRW: 0, TWD: 0, VND: 0,
 };
 
 function minorUnit(currency = 'EUR') {
